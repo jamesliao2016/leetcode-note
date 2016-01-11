@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <cassert>
+#include <iterator>
 
 using namespace std;
 /*
@@ -83,22 +84,59 @@ public:
 
 /*
  *  使用STL算法
+ *  先使用unique，将重复的元素全部移动到末尾，然后返回指向末尾第一个重复的数字的一个迭代器
+ *  然后使用distance计算vector开始元素和返回的迭代器之间的距离
+ *  需要注意unique算法只能删除相邻元素重复的
+ *
+ */
+class Solution4 {
+public:
+    int removeDuplicates(vector<int>& nums)
+    {
+        return distance(nums.begin(),unique(nums.begin(),nums.end()));
+    }
+};
+
+
+/*
+ *  upper_bound是返回第一个大于指定数的迭代器
  *
  *
  */
+class Solution5 {
+public:
+    int removeDuplicates(vector<int>& nums)
+    {
+        return removeDuplicates(nums.begin(),nums.end(),nums.begin()) - nums.begin();
+    }
+
+    template<typename InIt,typename OutIt>
+    OutIt removeDuplicates(InIt first,InIt last,OutIt output) {
+        while(first != last) {
+            *output++ = *first;
+            first = upper_bound(first,last,*first);
+        }
+        return output;
+    }
+};
+
 int main()
 {
     vector<int> num;
-    num.push_back(5);
-    num.push_back(6);
-    num.push_back(7);
     num.push_back(4);
     num.push_back(5);
     num.push_back(6);
+    num.push_back(5);
+    num.push_back(6);
+    num.push_back(7);
     Solution so;
     Solution2 so2;
     Solution3 so3;
+    Solution4 so4;
+    Solution5 so5;
     assert(so.removeDuplicates(num) == 4);
     assert(so2.removeDuplicates(num) == 4);
     assert(so3.removeDuplicates(num) == 4);
+    assert(so4.removeDuplicates(num) == 4);
+    assert(so5.removeDuplicates(num) == 4);
 }
