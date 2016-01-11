@@ -10,12 +10,12 @@ for i in $@;do
     filename="${filename}_$i"
 done
 
-filename="${filename}.cc"
-if [ -e $filename ];then
-    echo "error $filename exists"
+ccfilename="${filename}.cc"
+if [ -e $ccfilename ];then
+    echo "error $ccfilename exists"
 fi
 
-cat << EOF  > $filename
+cat << EOF  > $ccfilename
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -25,8 +25,22 @@ using namespace std;
 
 int main()
 {
+
 }
 EOF
 
-vim +8 $filename
+pyfilename="$filename.py"
+if [ -e $pyfilename ];then
+     echo "error $pyfilename exists"
+fi
+
+cat << EOF > $pyfilename
+#!/usr/bin/env python
+# encoding: utf-8
+
+
+if __name__ == "__main__":
+
+EOF
+vim +8 $ccfilename
 
