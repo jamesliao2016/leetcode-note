@@ -26,6 +26,20 @@ class Solution(object):
                     last = mid
         return -1
 
+
+# 直接利用index方法，是不是很easy啊．哈哈
+class Solution2(object):
+    def search(self,nums,target):
+        """
+        :type nums: Lits[int]
+        :type target: int
+        :rtype: int
+        """
+        try:
+            return nums.index(target)
+        except ValueError:
+            return -1
+
 if __name__ == "__main__":
     so = Solution()
     l = [7,8,9,1,2,3,4]
