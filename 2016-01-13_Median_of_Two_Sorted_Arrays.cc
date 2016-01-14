@@ -193,12 +193,73 @@ class Solution2 {
         }
 };
 
+/*
+ *  更简单的算法，利用了二分查找和数组有序这个条件，可以拿nums1的第2/k个元素,再拿nums2的第2/k个元素(这里假设k是偶数)
+ *  比较的结果有三种:
+ *  第一: 相等，那么很自然，这就是第k个元素(为什么这么说呢?参见下文的分析)
+ *  第二: nums1[k/2-1] < nums2[k/2-1] 那么第k个元素肯定不在nums1[0] ~ nums1[k/2-1]
+ *  第三: nums2[k/2-1] < nums1[k/2-1] 那么第k个元素肯定不在nums2[0] ~ nums2[k/2-1]
+ *
+ *  为什么会得出上面的结论呢，举个例子: nums=1 3 5 7 9 nums2= 2 4 6 8 10，总共有十个元素，那么中间元素就是第五个
+ *  均匀的分成两半，nums1取第2个元素，nums2取第三个元素进行比较(为什么要均匀分呢？,因为只有平均分成两半的时候当没有找到第k个元素的情况下
+ *  就可以最多的排除掉一半的元素了。)，拿3和6比，因为3小于6，那么可以肯定一件事就是在nums1和nums2合并后，1 3肯定在第k个元素的左边部分，
+ *  因为6大于2 4大于1,3,所以6可能是第k，或者是第k+n个元素。3的位置肯定小于k，那么这个时候可以很轻松排除掉1 3然后，再次用同样的方法查找，这个时候只要查找
+ *  第5-2个元素即可，因为前k个元素已经去除了2个了。
+ *
+ *  如此递归查找，那么何时结束呢?
+ *  当nums1或nums2有一方为空，那么很自然，第k个元素就是另一方的下标是k-1的元素
+ *  当nums1[k/2-1] == nums[k/2-1] 相等的时候
+ *  当k=1的时候返回nums1[0]和nums2[0]中最小的那个即可
+ */
+class Solution3 {
+    typedef vector<int>::iterator Iter;
+    public:
+        double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+            int total = nums1.size() + nums2.size();
+            if(total & 0x01) { //是奇数
+
+                return find_kth(nums1.begin(),nums1.size(),nums2.begin(),nums2.size(),total / 2 + 1);
+
+            } else {
+
+                return (find_kth(nums1.begin(),nums1.size(),nums2.begin(),nums2.size(),total / 2) +
+                        find_kth(nums1.begin(),nums1.size(),nums2.begin(),nums2.size(),total / 2 + 1)) / 2.0;
+
+            }
+        }
+    private:
+        /* find kth */
+        int find_kth(Iter nums1,int m,Iter nums2,int n,int k) {
+
+            if(m > n) //始终保证m是较小的
+                return find_kth(nums2,n,nums1,m,k);
+
+            if(m == 0)
+                return nums2[k - 1];
+
+            if(k == 1)
+                return *nums1 > *nums2 ? *nums2 : *nums1;
+            //均分
+            int l1 = min(k / 2,m);
+            int l2 = k - l1;
+            if (nums1[l1 - 1] == nums2[l2 - 1]) //第一种情况
+                return nums1[l1 - 1];
+
+            if(nums1[l1 - 1] < nums2[l2 - 1]) //第二种情况
+                return find_kth(nums1 + l1,m - l1,nums2,n,k - l1);
+
+            if(nums2[l2 - 1] < nums1[l1 - 1]) //第三种情况
+                return find_kth(nums1,m,nums2 + l2,n - l2,k - l2);
+        }
+};
 
 
 int main()
 {
     Solution2 so;
-    vector<int>nums1 = {1,2};
-    vector<int>nums2 = {1,2};
-    cout << so.findMedianSortedArrays(nums1,nums2) << endl;
+    Solution3 so3;
+    vector<int>nums1 = {3};
+    vector<int>nums2 = {1,2,4};
+ //   cout << so.findMedianSortedArrays(nums1,nums2) << endl;
+    cout << so3.findMedianSortedArrays(nums1,nums2) << endl;
 }
