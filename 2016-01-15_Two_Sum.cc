@@ -47,6 +47,29 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+                    vector<int> result;
+                    unordered_map<int,int> tempdata;
+                    int index1 = 0;
+                    int index2 = 1;
+                    pair<map<int,int>::iterator,bool> ret;
+                    unordered_map<int,int>::iterator itmap;
+                    vector<int>::iterator it = nums.begin();
+                    for(int i =0;it != nums.end();it++,i++)
+                    {
+                        itmap=tempdata.find(*it);
+                        if (itmap != tempdata.end()) {  //存在
+                            result.push_back(tempdata[*it]);
+                            result.push_back(i+1);
+                            return result;
+                        }
+                        tempdata.insert(make_pair<int,int>(target-(*it),i+1));
+                    }
+    }
+};
+
 int main()
 {
     vector<int> num = {0,4,3,0};
