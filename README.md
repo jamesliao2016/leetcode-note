@@ -1,7 +1,7 @@
 # leetcode-note
 训练自己的编程能力-每天一道题目
 ## 2016/1/10
-建立github仓库，指定计划,每天完成一道算法题，代码需要leetcode上进行ac，需要在博客上分析做代码的分析。
+建立github仓库，指定计划,每天(除周末)完成一道算法题，代码需要leetcode上进行ac，需要在博客上分析做代码的分析。
 
 ## 2016/1/11
 Remove_Duplicates_from_Sorted_Array (C++ and py implement)
@@ -20,4 +20,5 @@ Median_of_Two_Sorted_Arrays(py not implement)
 Longest_Consecutive_Sequence(C++ Implement)
 
 ## 2016/1/15
+Two_Sum (only complement C++ version)
 
