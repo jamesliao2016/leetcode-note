@@ -35,7 +35,7 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
             sort(nums.begin(),nums.end());
             vector<vector<int>> data;
-            for(int i = 0; i < nums.size();++i) {
+            for(int i = 0; i < nums.size() - 2;++i) {
                 //去除重复
                 if(i != 0 && nums[i] == nums[i-1])
                     continue;
@@ -112,7 +112,7 @@ public:
 int main()
 {
     vector<int> data = {-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6};
-    Solution2 so;
+    Solution so;
     auto ret = so.threeSum(data);
     for(auto num : ret) {
         for(auto data : num) {
