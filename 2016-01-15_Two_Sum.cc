@@ -47,6 +47,19 @@ public:
     }
 };
 
+/*
+ *  思路１和解法１类似，都是利用了,map来实现的，只不过这个解法是允许元素重复的．
+ *  遍历每个元素，查看这个元素是否在map中，如果不存在就保存target - num(遍历的这个元素值)的结果到map中
+ *  否则记录下标返回结果．例子:
+ *  -1 4 1 3 0 2
+ *  对于target = 0来说:
+ *      遍历-1 不在map中，记录key=1,value=1(元素的位置)
+ *      遍历4  不在map中，记录key=-4,value=2
+ *      遍历1  在map中，返回结果
+ *
+ *
+ *
+ */
 class Solution2 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
