@@ -20,7 +20,8 @@ cat << EOF  > $ccfilename
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <vector>
+#include <map>
+#include <unordered_map>
 
 using namespace std;
 
