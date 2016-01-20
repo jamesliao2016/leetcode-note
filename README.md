@@ -22,3 +22,13 @@ Longest_Consecutive_Sequence(C++ Implement)
 ## 2016/1/15
 Two_Sum (only complement C++ version)
 
+## 2016/1/18
+3Sum
+
+## 2016/1/19
+3Sum_Closest
+4Sum
+
+## 2016/1/20
+Remove_Element
+Next_Permutation
