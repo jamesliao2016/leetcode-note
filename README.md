@@ -32,3 +32,7 @@ Two_Sum (only complement C++ version)
 ## 2016/1/20
 Remove_Element
 Next_Permutation
+
+## 2016/1/21
+因为个人原因，懒惰，谈完，意志力不坚定，导致今天的任务没完成，22号晚上和周末两天，把这几天拉下的债务都清理完毕
+Permutation_Sequence (not implement)
