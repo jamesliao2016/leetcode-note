@@ -63,9 +63,64 @@ public:
 
 /*
  *  算法二,
- *
+ *  找到最大的柱子，然后从最大柱子开始向两侧前进
+ *  Setp1: find max element position
+ *  Setp2:每遍历一个柱子和钱一个柱子的高度比较，如果大于前一个柱子，说明这个柱子肯定不能装水，那么就更新前一个柱子的高度
+ *  否则就用一个柱子的高度减去当前柱子的高度就是这个柱子能存放的水量，其实本质上和解法一是一样的，只不过这里省去了min,求左边最大值和右边最大值的min
+ *  因为右侧最大值总是最大的．
+ */
+
+class Solution2 {
+public:
+    int trap(vector<int>& height) {
+        int max = 0;
+        //Setp1
+        for(int i = 0; i < n; i++)
+            if(height[i] > height[max]) max = i;
+
+        int water = 0;
+        //动态规划
+        for(int i = 0,peak = 0; i < max;++i)
+            if(height[i] > peak) peak = height[i];
+            else water += peak - height[i];
+
+        for(int i = n - 1,top = 0;i > max;--i)
+            if(height[i] > top) top = height[i];
+            else water += top - height[i];
+
+        return water;
+    }
+};
+
+/*
+ *  算法三
+ *  用一个栈辅助完成，小于栈顶的元素压入，大于等于栈顶就把栈里所有小雨或等于当前值的元素出堆栈处理掉
+ *  这样可以保证一个前提就是栈里面放的始终是每个柱子的左边最大值.
  *
  */
+
+
+
+class Solution3 {
+public:
+    int trap(vector<int>& height) {
+        stack<pair<int,int>> s;
+        int water = 0;
+        for(int i = 0; i < n; ++i) {
+            int Height = 0;
+            while(!s.empty()) {
+                int bar = s.top().first;
+                int pos = s.top().second;
+                //这一步没搞懂
+                water += (min(bar,height[i]) - Height) * (i - pos - 1)
+                Height = bar;
+            }
+            s.push(make_pair(height[i],i));
+        }
+    }
+};
+
+
 int main()
 {
     vector<int> data = {0,1,0,2,1,0,1,3,2,1,2,1};
