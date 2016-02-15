@@ -36,3 +36,29 @@ Next_Permutation
 ## 2016/1/21
 因为个人原因，懒惰，谈完，意志力不坚定，导致今天的任务没完成，22号晚上和周末两天，把这几天拉下的债务都清理完毕
 Permutation_Sequence (not implement)
+
+## 2016/1/22
+Valid_Sudoku
+
+## 2016/1/25
+Trapping_Rain_Water
+
+## 2016/1/26
+Climbing_Stairs
+Plus_One
+Rotate_Image
+
+## 2016/1/27
+Gray_Code
+
+## 2016/1/28
+Set_Matrix_Zeroes
+
+## 2016/1/29
+Gas_Station
+
+## 2016/2/1
+Candy
+
+## 2016/2/2
+开始春节放假，计划耽误了很多天2/15日才开始上班，因此这周会把2/2到2/19日期间没有做的题目都坐上．弥补春节放假没有做的事情．
