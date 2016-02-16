@@ -47,6 +47,7 @@ public:
                 prev = l1;
                 l2 = l2->next;
             }
+            l1 = l1->next;
             goto end;
         }
 
@@ -73,5 +74,14 @@ public:
 
 int main()
 {
-
+    ListNode node(1);
+    ListNode node2(9);
+    ListNode node3(9);
+    node2.next = &node3;
+    Solution so;
+    ListNode *ret = so.addTwoNumbers(&node,&node2);
+    while(ret) {
+        cout << ret->val << endl;
+        ret = ret->next;
+    }
 }
