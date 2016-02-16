@@ -15,7 +15,7 @@ struct ListNode {
 
 /*
  *  链表逆置是比较简单的,可以利用头插法来做,每摘入一个节点就头插法插入
- *
+ *  也可以递归来做
  */
 class Solution {
 public:
@@ -41,6 +41,13 @@ public:
     }
 };
 
+
+class Solution2 {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+    }
+};
 
 int main()
 {
