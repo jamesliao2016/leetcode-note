@@ -1,9 +1,14 @@
 #include <iostream>
 #include <algorithm>
+#include <limits>
 #include <string>
 #include <vector>
 #include <map>
+#include <cctype>
 #include <unordered_map>
+
+#define INT_MAX 2147483647
+#define INT_MIN -2147483648
 
 using namespace std;
 /*
@@ -23,10 +28,55 @@ using namespace std;
 class Solution {
     public:
         int myAtoi(string str) {
+            auto begin = str.begin();
+            int flag = 1;
+            int sum = 0;
+
+            while(begin != str.end()) {
+                if(isspace(*begin)) {
+                    ++begin;
+                } else
+                    break;
+            }
+            if(begin == str.end())return 0;
+
+            if(*begin == '+') {
+                flag = 1;
+                ++begin;
+            } else if(*begin == '-') {
+                flag = -1;
+                ++begin;
+            }
+            while(begin != str.end()) {
+
+                if(*begin >= '0' && *begin <= '9') {
+                    if(sum < (INT_MAX/10)) {
+
+                        sum = sum * 10 + (*begin - '0');
+
+                    } else  if(sum == (INT_MAX/10)){
+
+                        if((*begin - '0') >= (INT_MAX%10) ) {
+                            return flag == -1?INT_MIN:INT_MAX;
+                        }else
+                            sum = sum * 10 + (*begin - '0');
+
+                    } else
+                        return flag == -1?INT_MIN:INT_MAX;
+
+                } else {
+                    break;
+                }
+                ++begin;
+            }
+
+            return sum * flag;
         }
 };
 
 int main()
 {
-
+    string str("-2147483648");
+    Solution so;
+    cout << so.myAtoi(str) << endl;
 }
