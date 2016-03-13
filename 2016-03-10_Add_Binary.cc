@@ -20,20 +20,89 @@ using namespace std;
 class Solution {
 public:
     string addBinary(string a, string b) {
-        const int asize = a.size();
-        const int bsize = b.size();
-        const int retsize = asize > bsize ? : asize+1: bsize+1
-        bitset<asize> aset(a);
-        bitset<bsize> bset(b);
-        bitset<retsize> ret = a + b;
-        return ret.to_string();
+
+        int str_size = (a.size() > b.size())?(a.size()+1):(b.size()+1);
+        string ret(str_size,'0');
+
+        int aindex = a.size() - 1;
+        int bindex = b.size() - 1;
+        int flag = 0;
+        int count = str_size-1;
+
+        while(aindex >= 0 && bindex >= 0) {
+
+            int sum = a[aindex]-'0' + b[bindex]-'0';
+            ret[count--] = (sum + flag) % 2 + '0';
+
+            if(sum+flag >= 2)
+                flag = 1;
+
+            --aindex;
+            --bindex;
+        }
+
+        while(aindex >= 0) {
+            int sum = a[aindex] - '0' + flag;
+            if(sum >= 2)
+                flag = 1;
+            else
+                flag = 0;
+            ret[count--] = sum % 2 + '0';
+            --aindex;
+        }
+
+        while(bindex >= 0) {
+            int sum = a[aindex] - '0' + flag;
+            if(sum >= 2)
+                flag = 1;
+            else
+                flag = 0;
+            ret[count--] = sum % 2 + '0';
+            --bindex;
+        }
+
+        if(flag)
+            ret[count--] = '1';
+
+        if(ret[0] == '0')
+            return string(ret.begin()+1,ret.end());
+        return ret;
     }
+};
+
+/*
+ *  别人的代码写的写舒服,
+ *
+ *
+ */
+class Solution {
+public:
+	string addBinary(string a, string b) {
+		string result;
+		const size_t n = a.size() > b.size() ? a.size() : b.size();
+        //考虑到了
+		reverse(a.begin(), a.end());
+		reverse(b.begin(), b.end());
+		int carry = 0;
+        //确定遍历的次数
+		for (size_t i = 0; i < n; i++) {
+				const int ai = i < a.size() ? a[i] - '0' : 0;
+				const int bi = i < b.size() ? b[i] - '0' : 0;
+				const int val = (ai + bi + carry) % 2;
+				carry = (ai + bi + carry) / 2;
+				result.insert(result.begin(), val + '0');
+		}
+		if (carry == 1) {
+			result.insert(result.begin(), '1');
+		}
+		return result;
+	}
 };
 
 int main()
 {
-    string a = "11";
-    string b = "1";
+    string a = "101111";
+    string b = "10";
     Solution so;
     cout << so.addBinary(a,b) << endl;
 }
