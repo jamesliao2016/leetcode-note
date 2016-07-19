@@ -35,18 +35,5 @@ int main()
 }
 EOF
 
-pyfilename="$filename.py"
-if [ -e $pyfilename ];then
-     echo "error $pyfilename exists"
-fi
-
-cat << EOF > $pyfilename
-#!/usr/bin/env python
-# encoding: utf-8
-
-
-if __name__ == "__main__":
-
-EOF
 vim +8 $ccfilename
 
